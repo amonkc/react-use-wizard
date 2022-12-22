@@ -17,8 +17,7 @@
     "url": "https://github.com/devrnt/react-use-wizard/issues"
   },
   "files": [
-    "dist",
-    "src"
+    "dist"
   ],
   "engines": {
     "node": ">=10"
