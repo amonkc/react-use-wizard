@@ -22,13 +22,6 @@
   "engines": {
     "node": ">=10"
   },
-  "exports": {
-    ".": {
-      "browser": "./dist/react-use-wizard.esm.js",
-      "import": "./dist/react-use-wizard.esm.js",
-      "require": "./dist/index.js"
-    }
-  },
   "keywords": [
     "react",
     "reactjs",
