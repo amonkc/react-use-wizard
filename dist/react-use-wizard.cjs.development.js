@@ -65,7 +65,7 @@ const Wizard = /*#__PURE__*/React.memo(({
     if (hasNextStep.current) {
       const newActiveStepIndex = activeStep + 1;
       setActiveStep(newActiveStepIndex);
-      onStepChange == null ? void 0 : onStepChange(newActiveStepIndex);
+      onStepChange && onStepChange(newActiveStepIndex);
     }
   }, [activeStep, onStepChange]);
   const goToPreviousStep = React.useCallback(() => {
@@ -73,14 +73,14 @@ const Wizard = /*#__PURE__*/React.memo(({
       nextStepHandler.current = null;
       const newActiveStepIndex = activeStep - 1;
       setActiveStep(newActiveStepIndex);
-      onStepChange == null ? void 0 : onStepChange(newActiveStepIndex);
+      onStepChange && onStepChange(newActiveStepIndex);
     }
   }, [activeStep, onStepChange]);
   const goToStep = React.useCallback(stepIndex => {
     if (stepIndex >= 0 && stepIndex < stepCount) {
       nextStepHandler.current = null;
       setActiveStep(stepIndex);
-      onStepChange == null ? void 0 : onStepChange(stepIndex);
+      onStepChange && onStepChange(stepIndex);
     } else {
       {
         log('warn', ["Invalid step index [" + stepIndex + "] passed to 'goToStep'. ", "Ensure the given stepIndex is not out of boundaries."].join(''));

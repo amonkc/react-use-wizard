@@ -28,7 +28,7 @@ const Wizard: React.FC<React.PropsWithChildren<WizardProps>> = React.memo(
         const newActiveStepIndex = activeStep + 1;
 
         setActiveStep(newActiveStepIndex);
-        onStepChange?.(newActiveStepIndex);
+        onStepChange && onStepChange(newActiveStepIndex);
       }
     }, [activeStep, onStepChange]);
 
@@ -38,7 +38,7 @@ const Wizard: React.FC<React.PropsWithChildren<WizardProps>> = React.memo(
         const newActiveStepIndex = activeStep - 1;
 
         setActiveStep(newActiveStepIndex);
-        onStepChange?.(newActiveStepIndex);
+        onStepChange && onStepChange(newActiveStepIndex);
       }
     }, [activeStep, onStepChange]);
 
@@ -47,7 +47,7 @@ const Wizard: React.FC<React.PropsWithChildren<WizardProps>> = React.memo(
         if (stepIndex >= 0 && stepIndex < stepCount) {
           nextStepHandler.current = null;
           setActiveStep(stepIndex);
-          onStepChange?.(stepIndex);
+          onStepChange && onStepChange(stepIndex);
         } else {
           if (__DEV__) {
             logger.log(
