@@ -11,14 +11,14 @@ const Component = (
 );
 
 const ComponentWithHeader = (
-  <Wizard header={<p>header</p>}>
+  <Wizard header={() => <p>header</p>}>
     <p>step 1</p>
     <p>step 2</p>
   </Wizard>
 );
 
 const ComponentWithFooter = (
-  <Wizard footer={<p>footer</p>}>
+  <Wizard footer={() => <p>footer</p>}>
     <p>step 1</p>
     <p>step 2</p>
   </Wizard>

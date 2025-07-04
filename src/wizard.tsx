@@ -122,18 +122,10 @@ const Wizard: React.FC<React.PropsWithChildren<WizardProps>> = React.memo(
         if (activeStep > reactChildren.length) {
           logger.log('warn', 'An invalid startIndex is passed to <Wizard>');
         }
-        // Invalid header element
-        if (header && !React.isValidElement(header)) {
-          logger.log('error', 'Invalid header passed to <Wizard>');
-        }
-        // Invalid footer element
-        if (footer && !React.isValidElement(footer)) {
-          logger.log('error', 'Invalid footer passed to <Wizard>');
-        }
       }
 
       return reactChildren[activeStep];
-    }, [activeStep, children, header, footer]);
+    }, [activeStep, children]);
 
     const enhancedActiveStepContent = React.useMemo(
       () =>
@@ -145,9 +137,19 @@ const Wizard: React.FC<React.PropsWithChildren<WizardProps>> = React.memo(
 
     return (
       <WizardContext.Provider value={wizardValue}>
-        {header}
+        {header
+          ? header({
+              activeStep: wizardValue.activeStep,
+              stepCount: wizardValue.stepCount,
+            })
+          : null}
         {enhancedActiveStepContent}
-        {footer}
+        {footer
+          ? footer({
+              activeStep: wizardValue.activeStep,
+              stepCount: wizardValue.stepCount,
+            })
+          : null}
       </WizardContext.Provider>
     );
   },
