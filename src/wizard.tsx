@@ -60,7 +60,7 @@ const Wizard: React.FC<React.PropsWithChildren<WizardProps>> = React.memo(
           }
         }
       },
-      [stepCount, onStepChange],
+      [stepCount, onStepChange, startIndex],
     );
 
     // Callback to attach the step handler
@@ -139,15 +139,29 @@ const Wizard: React.FC<React.PropsWithChildren<WizardProps>> = React.memo(
       <WizardContext.Provider value={wizardValue}>
         {header
           ? header({
-              activeStep: wizardValue.activeStep,
-              stepCount: wizardValue.stepCount,
+              nextStep: doNextStep,
+              previousStep: goToPreviousStep,
+              handleStep: handleStep.current,
+              isLoading,
+              activeStep,
+              stepCount,
+              isFirstStep: !hasPreviousStep.current,
+              isLastStep: !hasNextStep.current,
+              goToStep,
             })
           : null}
         {enhancedActiveStepContent}
         {footer
           ? footer({
-              activeStep: wizardValue.activeStep,
-              stepCount: wizardValue.stepCount,
+              nextStep: doNextStep,
+              previousStep: goToPreviousStep,
+              handleStep: handleStep.current,
+              isLoading,
+              activeStep,
+              stepCount,
+              isFirstStep: !hasPreviousStep.current,
+              isLastStep: !hasNextStep.current,
+              goToStep,
             })
           : null}
       </WizardContext.Provider>
