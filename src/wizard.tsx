@@ -137,19 +137,9 @@ const Wizard: React.FC<React.PropsWithChildren<WizardProps>> = React.memo(
 
     return (
       <WizardContext.Provider value={wizardValue}>
-        {header
-          ? header({
-              activeStep: wizardValue.activeStep,
-              stepCount: wizardValue.stepCount,
-            })
-          : null}
+        {header ? header(wizardValue) : null}
         {enhancedActiveStepContent}
-        {footer
-          ? footer({
-              activeStep: wizardValue.activeStep,
-              stepCount: wizardValue.stepCount,
-            })
-          : null}
+        {footer ? footer(wizardValue) : null}
       </WizardContext.Provider>
     );
   },

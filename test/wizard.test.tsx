@@ -73,4 +73,24 @@ describe('Wizard', () => {
 
     expect(queryByRole('main')).toBeInTheDocument();
   });
+
+  test('should call `goToStep` from header', () => {
+    const { queryByText, getByText } = render(
+      <Wizard
+        header={({ goToStep }) => (
+          <button onClick={() => goToStep(1)}>go to step 2</button>
+        )}
+      >
+        <p>step 1</p>
+        <p>step 2</p>
+      </Wizard>,
+    );
+
+    expect(queryByText('step 1')).toBeInTheDocument();
+
+    getByText('go to step 2').click();
+
+    expect(queryByText('step 2')).toBeInTheDocument();
+    expect(queryByText('step 1')).not.toBeInTheDocument();
+  });
 });

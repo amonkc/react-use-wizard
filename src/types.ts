@@ -2,13 +2,9 @@ export type Handler = (() => Promise<void>) | (() => void) | null;
 
 export type WizardProps = {
   /** Optional header that is shown above the active step */
-  header?: (
-    wizardValues: Pick<WizardValues, 'activeStep' | 'stepCount'>,
-  ) => React.ReactNode;
+  header?: (wizardValues: WizardValues) => React.ReactNode;
   /** Optional footer that is shown below the active step */
-  footer?: (
-    wizardValues: Pick<WizardValues, 'activeStep' | 'stepCount'>,
-  ) => React.ReactNode;
+  footer?: (wizardValues: WizardValues) => React.ReactNode;
   /** Optional start index @default 0 */
   startIndex?: number;
   /**
