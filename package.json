@@ -3,7 +3,7 @@
   "author": "devrnt <me@jonasdevrient.be>",
   "description": "React wizard (stepper) builder without the hassle, powered by hooks.",
   "homepage": "https://github.com/devrnt/react-use-wizard#readme",
-  "module": "dist/react-use-wizard.mjs",
+  "module": "dist/index.mjs",
   "version": "2.3.0",
   "license": "MIT",
   "main": "dist/index.js",
@@ -20,13 +20,13 @@
     "dist"
   ],
   "engines": {
-    "node": ">=10"
+    "node": ">=14"
   },
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "browser": "./dist/react-use-wizard.mjs",
-      "import": "./dist/react-use-wizard.mjs",
+      "browser": "./dist/index.mjs",
+      "import": "./dist/index.mjs",
       "require": "./dist/index.js"
     }
   },
@@ -47,15 +47,15 @@
     "devrnt"
   ],
   "scripts": {
-    "start": "tsdx watch",
-    "build": "tsdx build",
+    "start": "tsup --watch",
+    "build": "tsup",
     "build:playground": "yarn --cwd ./playground install && yarn --cwd ./playground build",
-    "test": "tsdx test --passWithNoTests",
-    "test:watch": "tsdx test --watch",
-    "test:coverage": "tsdx test --coverage",
-    "lint": "tsdx lint",
-    "prepare": "tsdx build",
-    "size": "tsdx build && size-limit",
+    "test": "jest --passWithNoTests",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "lint": "eslint src --ext ts,tsx",
+    "prepare": "tsup",
+    "size": "tsup && size-limit",
     "analyze": "size-limit --why",
     "release": "np"
   },
@@ -63,18 +63,13 @@
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "tsdx lint"
-    }
-  },
   "size-limit": [
     {
-      "path": "dist/react-use-wizard.cjs.production.min.js",
+      "path": "dist/index.js",
       "limit": "500 B"
     },
     {
-      "path": "dist/react-use-wizard.esm.js",
+      "path": "dist/index.mjs",
       "limit": "500 B"
     }
   ],
@@ -82,26 +77,31 @@
     "registry": "https://registry.npmjs.org"
   },
   "devDependencies": {
-    "@babel/core": "^7.15.8",
-    "@babel/preset-env": "^7.15.8",
     "@size-limit/preset-small-lib": "^4.10.2",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/react-hooks": "^7.0.2",
+    "@types/jest": "^27.5.2",
     "@types/react": "^17.0.29",
     "@types/react-dom": "^17.0.9",
-    "babel-jest": "^27.2.5",
+    "@typescript-eslint/eslint-plugin": "^5.62.0",
+    "@typescript-eslint/parser": "^5.62.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-jsdoc": "^46.4.4",
     "eslint-plugin-promise": "^5.1.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "husky": "^7.0.2",
+    "jest": "^27.5.1",
+    "jest-environment-jsdom": "^27.5.1",
     "np": "^8.0.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-test-renderer": "^17.0.2",
     "size-limit": "^4.10.2",
-    "tsdx": "^0.14.1",
+    "ts-jest": "^27.1.5",
     "tslib": "^2.3.1",
+    "tsup": "^8.3.0",
     "typescript": "^4.4.3"
   },
   "packageManager": "yarn@4.9.2+sha512.1fc009bc09d13cfd0e19efa44cbfc2b9cf6ca61482725eb35bbc5e257e093ebf4130db6dfe15d604ff4b79efd8e1e8e99b25fa7d0a6197c9f9826358d4d65c3c"

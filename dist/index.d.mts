@@ -1,10 +1,11 @@
-/// <reference types="react" />
-export declare type Handler = (() => Promise<void>) | (() => void) | null;
-export declare type WizardProps = {
+import * as React$1 from 'react';
+
+type Handler$1 = (() => Promise<void>) | (() => void) | null;
+type WizardProps$1 = {
     /** Optional header that is shown above the active step */
-    header?: (wizardValues: Pick<WizardValues, 'activeStep' | 'stepCount'>) => React.ReactNode;
+    header?: (wizardValues: WizardValues$1) => React.ReactNode;
     /** Optional footer that is shown below the active step */
-    footer?: (wizardValues: Pick<WizardValues, 'activeStep' | 'stepCount'>) => React.ReactNode;
+    footer?: (wizardValues: WizardValues$1) => React.ReactNode;
     /** Optional start index @default 0 */
     startIndex?: number;
     /**
@@ -20,7 +21,7 @@ export declare type WizardProps = {
     /** Callback that will be invoked with the new step index when the wizard changes steps */
     onStepChange?: (stepIndex: number) => void;
 };
-export declare type WizardValues = {
+type WizardValues$1 = {
     /**
      * Go to the next step
      */
@@ -38,7 +39,7 @@ export declare type WizardValues = {
      * Attach a callback that will be called when calling `nextStep()`
      * @param handler Can be either sync or async
      */
-    handleStep: (handler: Handler) => void;
+    handleStep: (handler: Handler$1) => void;
     /**
      * Indicate the current state of the handler
      *
@@ -55,5 +56,13 @@ export declare type WizardValues = {
     /** Indicate if the current step is the last step (aka no next step) */
     isLastStep: boolean;
 };
-/** Console log levels */
-export declare type LogLevel = 'info' | 'error' | 'warn';
+
+declare const useWizard: () => WizardValues$1;
+
+declare const Wizard: React$1.FC<React$1.PropsWithChildren<WizardProps$1>>;
+
+type WizardProps = WizardProps$1;
+type WizardValues = WizardValues$1;
+type Handler = Handler$1;
+
+export { type Handler, Wizard, type WizardProps, type WizardValues, useWizard };

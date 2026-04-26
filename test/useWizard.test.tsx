@@ -174,6 +174,7 @@ describe('useWizard', () => {
   });
 
   test('should not go to given step index when out of boundary', async () => {
+    const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
     const { result } = renderUseWizardHook();
 
     try {
@@ -185,6 +186,8 @@ describe('useWizard', () => {
       expect(result.current.isFirstStep).toBe(true);
       expect(result.current.isLastStep).toBe(false);
     }
+
+    warnSpy.mockRestore();
   });
 
   test('should thrown error on async nextStep', async () => {
@@ -301,7 +304,9 @@ describe('useWizard', () => {
       const onStepChange = jest.fn();
       const { result, waitForNextUpdate } = renderUseWizardHook(onStepChange);
 
-      result.current.nextStep();
+      act(() => {
+        result.current.nextStep();
+      });
 
       await waitForNextUpdate();
 

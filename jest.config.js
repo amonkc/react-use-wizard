@@ -1,7 +1,14 @@
+/** @type {import('ts-jest').JestConfigWithTsJest} */
 module.exports = {
-  // https://github.com/testing-library/jest-native/issues/46#issuecomment-748674706
+  preset: 'ts-jest',
+  testEnvironment: 'jsdom',
   setupFilesAfterEnv: ['<rootDir>/test/setup.ts'],
   globals: {
     __DEV__: 'development',
+    'ts-jest': {
+      tsconfig: {
+        jsx: 'react',
+      },
+    },
   },
 };
